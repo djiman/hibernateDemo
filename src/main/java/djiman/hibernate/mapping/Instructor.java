@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,9 +25,9 @@ public class Instructor {
 	@Column(name = "email")
 	private String email;
 
-	// OneToOne bidirectionnel
-	@OneToOne(mappedBy = "instructor")
-	private Course course;
+//	// OneToOne bidirectionnel
+//	@OneToOne(mappedBy = "instructor")
+//	private Course course;
 
 	public Instructor() {
 	}
@@ -65,12 +64,12 @@ public class Instructor {
 		this.email = email;
 	}
 
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
+//	public Course getCourse() {
+//		return course;
+//	}
+//
+//	public void setCourse(Course course) {
+//		this.course = course;
+//	}
 
 }

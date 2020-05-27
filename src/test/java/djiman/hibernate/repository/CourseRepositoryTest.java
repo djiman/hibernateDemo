@@ -2,16 +2,21 @@ package djiman.hibernate.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import djiman.hibernate.AppMain;
+
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@ComponentScan("djiman.hibernate.repository")
+@SpringBootTest(classes = { AppMain.class })
+@ActiveProfiles("test")
+@Transactional
 class CourseRepositoryTest {
 
 	@Autowired
@@ -21,13 +26,14 @@ class CourseRepositoryTest {
 	private InstructorRepository instructorRepository;
 
 	@Test
-	void getInstructorFromCourse_UnidirectionnalOneToOne() {
-		assertEquals("Djiman", courseRepository.findById(1L).get().getInstructor().getFirstName());
+	void getInstructorFromCourse_UnidirectionnalOneToMany() {
+		assertEquals(2, courseRepository.findById(1L).get().getCourseInstructor().size());
+		assertEquals(1, courseRepository.findById(2L).get().getCourseInstructor().size());
 	}
 
-	@Test
-	void getCourseFromInstructor_BidirectionnalOneToOne() {
-		assertEquals("French", instructorRepository.findById(1L).get().getCourse().getTitle());
-	}
+//	@Test
+//	void getCourseFromInstructor_BidirectionnalOneToOne() {
+//		assertEquals("English", instructorRepository.findById(1L).get().getCourse().getTitle());
+//	}
 
 }

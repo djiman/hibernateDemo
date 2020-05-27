@@ -1,12 +1,15 @@
 package djiman.hibernate.mapping;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +24,9 @@ public class Course {
 	@Column(name = "title")
 	private String title;
 
-	@OneToOne
-	@JoinColumn(name = "instructor_id")
-	private Instructor instructor;
+	@OneToMany
+	@JoinColumn(name = "course_id")
+	private Set<CourseInstructor> courseInstructor = new HashSet<CourseInstructor>();
 
 	// Constructeur par defaut, obligatoire pour hibernate
 	public Course() {
@@ -45,11 +48,12 @@ public class Course {
 		this.title = title;
 	}
 
-	public Instructor getInstructor() {
-		return instructor;
+	public Set<CourseInstructor> getCourseInstructor() {
+		return courseInstructor;
 	}
 
-	public void setInstructor(Instructor instructor) {
-		this.instructor = instructor;
+	public void setCourseInstructor(Set<CourseInstructor> courseInstructor) {
+		this.courseInstructor = courseInstructor;
 	}
+
 }
