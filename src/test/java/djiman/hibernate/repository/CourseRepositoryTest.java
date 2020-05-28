@@ -31,9 +31,9 @@ class CourseRepositoryTest {
 		assertEquals(2, courseRepository.findById(2L).get().getCourseInstructor().size());
 	}
 
-//	@Test
-//	void getCourseFromInstructor_BidirectionnalOneToOne() {
-//		assertEquals("English", instructorRepository.findById(1L).get().getCourse().getTitle());
-//	}
+	@Test
+	void getCourseFromInstructor_BidirectionnalManyToMany() {
+		assertEquals(2, instructorRepository.findById(1L).get().getCourse().size());
+	}
 
 }

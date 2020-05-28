@@ -1,10 +1,14 @@
 package djiman.hibernate.mapping;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,9 +29,8 @@ public class Instructor {
 	@Column(name = "email")
 	private String email;
 
-//	// OneToOne bidirectionnel
-//	@OneToOne(mappedBy = "instructor")
-//	private Course course;
+	@ManyToMany(mappedBy = "courseInstructor")
+	private Set<Course> course = new HashSet<Course>();
 
 	public Instructor() {
 	}
@@ -64,12 +67,12 @@ public class Instructor {
 		this.email = email;
 	}
 
-//	public Course getCourse() {
-//		return course;
-//	}
-//
-//	public void setCourse(Course course) {
-//		this.course = course;
-//	}
+	public Set<Course> getCourse() {
+		return course;
+	}
+
+	public void setCourse(Set<Course> course) {
+		this.course = course;
+	}
 
 }
