@@ -26,9 +26,9 @@ class CourseRepositoryTest {
 	private InstructorRepository instructorRepository;
 
 	@Test
-	void getInstructorFromCourse_UnidirectionnalOneToMany() {
+	void getInstructorFromCourse_UnidirectionnalManyToMany() {
 		assertEquals(2, courseRepository.findById(1L).get().getCourseInstructor().size());
-		assertEquals(1, courseRepository.findById(2L).get().getCourseInstructor().size());
+		assertEquals(2, courseRepository.findById(2L).get().getCourseInstructor().size());
 	}
 
 //	@Test

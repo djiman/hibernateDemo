@@ -9,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,9 +25,9 @@ public class Course {
 	@Column(name = "title")
 	private String title;
 
-	@OneToMany
-	@JoinColumn(name = "course_id")
-	private Set<CourseInstructor> courseInstructor = new HashSet<CourseInstructor>();
+	@ManyToMany 
+	@JoinTable(name = "course_instructor", joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "instructor_id", referencedColumnName = "id"))
+	private Set<Instructor> courseInstructor = new HashSet<Instructor>();
 
 	// Constructeur par defaut, obligatoire pour hibernate
 	public Course() {
@@ -48,11 +49,11 @@ public class Course {
 		this.title = title;
 	}
 
-	public Set<CourseInstructor> getCourseInstructor() {
+	public Set<Instructor> getCourseInstructor() {
 		return courseInstructor;
 	}
 
-	public void setCourseInstructor(Set<CourseInstructor> courseInstructor) {
+	public void setCourseInstructor(Set<Instructor> courseInstructor) {
 		this.courseInstructor = courseInstructor;
 	}
 
